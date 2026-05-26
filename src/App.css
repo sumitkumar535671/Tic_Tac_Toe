@@ -1,0 +1,140 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  /* Player Colors */
+  --color-x: #38bdf8; /* Vibrant Cyan */
+  --color-o: #f43f5e; /* Radiant Rose */
+  --accent-glow-x: rgba(56, 189, 248, 0.3);
+  --accent-glow-o: rgba(244, 63, 94, 0.3);
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+.game {
+  width: 100%;
+  max-width: 360px;
+  padding: 28px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.status {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+  align-items: center;
+  color: var(--text-main);
+}
+
+/* Dynamic status coloring based on context */
+.status span {
+  animation: fadeIn 0.3s ease;
+}
+
+.reset-button {
+  padding: 10px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.reset-button:active {
+  transform: translateY(1px);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px; /* Giving breathing room between the modern tiles */
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  font-size: 42px;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.5);
+  color: transparent; /* Controlled via dynamic classes below */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Hover effects for empty, playable cells */
+.cell:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.03);
+}
+
+/* Custom styling for X state */
+.cell.x-cell {
+  color: var(--color-x);
+  text-shadow: 0 0 16px var(--accent-glow-x);
+  background: rgba(56, 189, 248, 0.06);
+  border-color: rgba(56, 189, 248, 0.2);
+  animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Custom styling for O state */
+.cell.o-cell {
+  color: var(--color-o);
+  text-shadow: 0 0 16px var(--accent-glow-o);
+  background: rgba(244, 63, 94, 0.06);
+  border-color: rgba(244, 63, 94, 0.2);
+  animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cell:disabled {
+  cursor: default;
+}
+
+/* Subtle animations */
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
