@@ -140,9 +140,46 @@ body {
 }
 
 
-/* for mobiles */
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 
+*{
+  box-sizing: border-box;
+}
 
+body{
+  padding: 16px;
+}
+
+/* Tablet */
+@media (max-width: 768px){
+
+  .game{
+    max-width: 340px;
+    padding: 24px;
+  }
+
+  .status{
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .status span{
+    font-size: 20px;
+  }
+
+  .cell{
+    font-size: 38px;
+    border-radius: 14px;
+  }
+
+  .board{
+    gap: 10px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 480px){
 
   body{
@@ -184,5 +221,27 @@ body {
     font-size: 32px;
 
     border-radius: 12px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 340px){
+
+  .game{
+    padding: 14px;
+  }
+
+  .status span{
+    font-size: 16px;
+  }
+
+  .cell{
+    font-size: 28px;
+    border-radius: 10px;
+  }
+
+  .reset-button{
+    font-size: 13px;
+    padding: 10px;
   }
 }
